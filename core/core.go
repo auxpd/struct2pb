@@ -61,7 +61,7 @@ func (m Message) String() string {
 	buf.WriteString(fmt.Sprintf("message %s {\n", m.Name))
 	for _, f := range m.Fields {
 		if len(f.Comment) > 0 {
-			buf.WriteString(fmt.Sprintf("%s%s; //%s\n", indent, f, f.Comment))
+			buf.WriteString(fmt.Sprintf("%s%s; // %s\n", indent, f, f.Comment))
 		} else {
 			buf.WriteString(fmt.Sprintf("%s%s;\n", indent, f))
 		}
