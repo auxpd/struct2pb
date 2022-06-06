@@ -147,26 +147,14 @@ func goType2PbType(t reflect.Type, strictMode bool) string {
 	case reflect.Float32:
 		return pbFloat32
 
-	case reflect.Int:
-		fallthrough
-	case reflect.Int64:
+	case reflect.Int, reflect.Int64:
 		return pbInt64
-	case reflect.Int32:
-		fallthrough
-	case reflect.Int16:
-		fallthrough
-	case reflect.Int8:
+	case reflect.Int32, reflect.Int16, reflect.Int8:
 		return pbInt32
 
-	case reflect.Uint:
-		fallthrough
-	case reflect.Uint64:
+	case reflect.Uint, reflect.Uint64:
 		return pbUint64
-	case reflect.Uint32:
-		fallthrough
-	case reflect.Uint16:
-		fallthrough
-	case reflect.Uint8:
+	case reflect.Uint32, reflect.Uint16, reflect.Uint8:
 		return pbUint32
 
 	case reflect.Bool:
@@ -216,11 +204,7 @@ func goType2PbType(t reflect.Type, strictMode bool) string {
 func allowedMapValue(t reflect.Type) bool {
 	// map字段不能使用repeated关键字修饰
 	switch t.Kind() {
-	case reflect.Map:
-		return false
-	case reflect.Array:
-		return false
-	case reflect.Slice:
+	case reflect.Map, reflect.Array, reflect.Slice:
 		return false
 	default:
 		return true
@@ -233,14 +217,7 @@ func allowedMapKey(t reflect.Type) bool {
 	case reflect.Map:
 		fallthrough
 
-	case reflect.Array:
-		fallthrough
-	case reflect.Slice:
-		fallthrough
-
-	case reflect.Float64:
-		fallthrough
-	case reflect.Float32:
+	case reflect.Array, reflect.Slice, reflect.Float64, reflect.Float32:
 		return false
 	default:
 		return true
